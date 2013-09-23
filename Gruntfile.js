@@ -8,9 +8,17 @@ module.exports = function(grunt) {
                 options: {
                     style: 'nested'
                 },
-                files: { // Dictionary of files
-                    'build/styles/main.css': 'src/styles/main.scss'
-                }
+                files: [{
+                    expand: true,
+                    src: ['src/styles/*.scss'],
+                    dest: 'build/styles/',
+                    ext: '.css',
+                    flatten: true
+                }]
+
+                // { // Dictionary of files
+                //     'build/styles/mobile.css': 'src/styles/mobile.scss'
+                // }
             }
         },
         copy: {

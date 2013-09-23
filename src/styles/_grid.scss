@@ -1,37 +1,26 @@
-$grid-num-cols: 12;
-$default-gutter: 2%;
+@import '_utils';
+@import '_respond';
 
-@mixin grid-container($cols: $grid-num-cols, $num-cols: $grid-num-cols) {
-	@if ($cols < $num-cols) {
-		width: ( $cols / $num-cols ) * 100%;
+$grid-columns: 12;
+$grid-gutter: 10px;
+$viewport-width: 320px !default;
+
+@include respond-to($screen-size) {
+	.container {
+		@extend %clearfix;
+		width: $viewport-width;
 	}
-	@extend %cf;
 }
 
-%grid-base {
+%grid-column-base {
 	float: left;
 	box-sizing: border-box;
-	background: lightgrey;
-	padding: $default-gutter;
-	margin: $default-gutter;
+	padding: $grid-gutter;
 }
 
-@mixin grid($cols, $gutter: $default-gutter, $num-cols: $grid-num-cols) {
-	width: ( $cols / $num-cols ) * 100% - 2 * $gutter;
-	@if ($gutter != $default-gutter) {
-		padding: $gutter;
-		margin: $gutter;
+@for $i from 1 through $grid-columns {
+	.col-#{$screen-size}-#{$i} {
+		@extend %grid-column-base;
+		width: $i * 100% / $grid-columns;
 	}
-}
-
-%cf:before,
-%cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
-%cf:after {
-    clear: both;
-}
-%cf {
-    *zoom: 1;
 }

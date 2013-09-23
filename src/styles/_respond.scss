@@ -1,0 +1,7 @@
+$screen-size: xs !default;
+
+@mixin respond-to($size) {
+	@if $size == $screen-size {
+		@content;
+	}
+}
