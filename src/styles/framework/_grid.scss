@@ -1,0 +1,67 @@
+@import '_utils';
+@import '_respond';
+
+$grid-quick: false !default;
+$grid-full-width: false !default;
+$grid-columns: 12 !default;
+$grid-gutter: 15px !default;
+$grid-width: 320px !default;
+$grid-column-width: $grid-width / $grid-columns;
+
+//TODO: bryt ut sånt som bara behöver vara på grund-cssen, typ float, margin osv
+
+@include respond-to($screen-size) {
+
+	%container {
+		@if $grid-full-width != true {
+			width: $grid-width + $grid-gutter * 2;
+		} @else {
+			width: 100%;
+		}
+		margin: 0 auto;
+		@extend %clearfix;
+	}
+
+	@if $grid-quick == true {
+		.container {
+			@extend %container;
+		}
+	}
+}
+
+%grid-column-base {
+	padding: $grid-gutter;
+	float: left;
+	display: block;
+}
+
+%grid-column-rel-base {
+	position: relative;
+}
+
+@for $i from 1 through $grid-columns {
+	%col-#{$i} {
+		@extend %grid-column-base;
+		@if $i < $grid-columns {
+			width: $i * 100% / $grid-columns;
+		} @else {
+			width: 100%;
+		}
+	}
+
+	@if $grid-quick == true {
+		.col-#{$screen-size}-#{$i} {
+			@extend %col-#{$i};
+		}
+	}
+
+	%pull-#{$i} {
+		@extend %grid-column-rel-base;
+		left: - ($i * 100% / $grid-columns);
+	}
+
+	%push-#{$i} {
+		@extend %grid-column-rel-base;
+		left: ($i * 100% / $grid-columns);
+	}
+}

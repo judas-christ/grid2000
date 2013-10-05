@@ -1,0 +1,7 @@
+$screen-size: xs !default;
+
+@if $screen-size == xs {
+	*, *:before, *:after {
+		box-sizing: border-box;
+	}
+}
