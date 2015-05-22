@@ -1,0 +1,9 @@
+$screen-size: xs;
+@import 'all';
+
+@each $size, $width in $layout-sizes {
+  @media all and (min-width: $width) {
+    $screen-size: $size;
+    @import 'all';
+  }
+}

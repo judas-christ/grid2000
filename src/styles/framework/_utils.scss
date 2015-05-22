@@ -1,12 +1,8 @@
 //Clearfix
-%clearfix:before,
-%clearfix:after {
-    content: " "; // 1
-    display: table; // 2
-}
-%clearfix:after {
+@mixin clearfix {
+  &:after {
+    content: ' ';
+    display: table;
     clear: both;
-}
-%clearfix {
-    *zoom: 1;
+  }
 }

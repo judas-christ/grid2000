@@ -10,58 +10,47 @@ $grid-column-width: $grid-width / $grid-columns;
 
 //TODO: bryt ut sånt som bara behöver vara på grund-cssen, typ float, margin osv
 
-@include respond-to($screen-size) {
-
-	%container {
-		@if $grid-full-width != true {
-			width: $grid-width + $grid-gutter * 2;
-		} @else {
-			width: 100%;
-		}
-		margin: 0 auto;
-		@extend %clearfix;
-	}
-
-	@if $grid-quick == true {
-		.container {
-			@extend %container;
-		}
-	}
+/// The grid container mixin.
+@mixin grid() {
+	margin-left: - $grid-gutter;
+	margin-right: - $grid-gutter;
 }
 
-%grid-column-base {
-	padding: $grid-gutter;
-	float: left;
-	display: block;
+@mixin grid-column($span, $total: $grid-columns) {
+	@if $span == $total {
+		float: none;
+		width: auto;
+	} @else {
+		float: left;
+		width: percentage($span / $total);
+	}
+	padding-left: $grid-gutter;
+	padding-right: $grid-gutter;
+	min-height: 1px; //to avoid collapsing empty columns
 }
 
-%grid-column-rel-base {
+@mixin grid-push($cols, $total: $grid-columns) {
 	position: relative;
+	left: percentage($cols / $total);
 }
 
-@for $i from 1 through $grid-columns {
-	%col-#{$i} {
-		@extend %grid-column-base;
-		@if $i < $grid-columns {
-			width: $i * 100% / $grid-columns;
-		} @else {
-			width: 100%;
+@mixin grid-pull($cols, $total: $grid-columns) {
+	position: relative;
+	left: percentage($cols / $total);
+}
+
+@if $grid-quick {
+	@include respond-to(xs) {
+		.row {
+			@include grid;
 		}
 	}
 
-	@if $grid-quick == true {
-		.col-#{$screen-size}-#{$i} {
-			@extend %col-#{$i};
+	@each $layout-size in xs, s, m, l, xl {
+		@for $i from 1 through $grid-columns {
+			.col-#{$layout-size}-#{$i} {
+				@include grid-column($i);
+			}
 		}
-	}
-
-	%pull-#{$i} {
-		@extend %grid-column-rel-base;
-		left: - ($i * 100% / $grid-columns);
-	}
-
-	%push-#{$i} {
-		@extend %grid-column-rel-base;
-		left: ($i * 100% / $grid-columns);
 	}
 }

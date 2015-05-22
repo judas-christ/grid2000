@@ -1,7 +1,9 @@
-$screen-size: xs !default;
+@include respond-to(xs) {
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
 
-@if $screen-size == xs {
-	*, *:before, *:after {
-		box-sizing: border-box;
-	}
+  html, body {
+    box-sizing: border-box;
+  }
 }

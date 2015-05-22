@@ -1,42 +1,6 @@
 body {
-	@extend %container;
+	@include custom-container;
 	background-color: #f0f0f0;
-	padding-top: 65px;
+	padding-top: 50px;
 }
 
-.list {
-	@extend %clearfix;
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	display: block;
-
-	li {
-		@include respond-to(xs) {
-			@extend	%col-12;
-		}
-
-		@include respond-to(s) {
-			@extend	%col-6;
-		}
-
-		@include respond-to(m) {
-			@extend	%col-3;
-		}
-	}
-}
-
-.module {
-	box-shadow: 0 1px 1px rgba(0,0,0,0.2);
-
-	> header {
-		background: lime;
-		padding: 15px;
-		font-weight: bold;
-	}
-	.body {
-		background: white;
-		padding: 15px;
-		min-height: 60px;
-	}
-}

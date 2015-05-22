@@ -1,5 +1,5 @@
-@import 'framework/_framework';
+@import 'custom/config';
 
-@import 'custom/_typo';
-@import 'custom/_struct';
-@import 'custom/_navs';
+@import 'framework/framework';
+
+@import 'custom/custom';

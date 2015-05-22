@@ -1,5 +1,15 @@
-html {
-	font-family: arial, helvetica, sans-serif;
-	color: #333;
-	background-color: #333;
+@include respond-to(xs) {
+  html {
+  	font-family: arial, helvetica, sans-serif;
+  	color: #333;
+  	background-color: #333;
+  }
+
+  p {
+    margin: 0;
+
+    & + & {
+      margin-top: 1em;
+    }
+  }
 }

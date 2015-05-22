@@ -1,0 +1,40 @@
+@include respond-to(xs) {
+  .list {
+    @include clearfix;
+    margin: 0;
+    @include grid;
+    padding: 0;
+    list-style-type: none;
+    display: block;
+
+    &__item {
+      @include grid-column(12);
+      padding-top: $grid-gutter;
+      padding-bottom: $grid-gutter;
+    }
+  }
+}
+
+@include respond-to(s) {
+  .list {
+    &__item {
+      @include grid-column(6);
+    }
+  }
+}
+
+@include respond-to(m) {
+  .list {
+    &__item {
+      @include grid-column(4);
+    }
+  }
+}
+
+@include respond-to(l) {
+  .list {
+    &__item {
+      @include grid-column(3);
+    }
+  }
+}

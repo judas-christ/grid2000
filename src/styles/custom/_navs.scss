@@ -1,22 +1,24 @@
-body > header {
-	background-color: #666;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+@include respond-to(xs) {
+	.main-header {
+		background-color: #666;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+	}
 
-	nav {
-		@extend %container;
+	.main-menu {
+		@include custom-container;
 		line-height: 30px;
 		padding: 10px 15px;
 
-		a {
+		&__item {
 			color: #f0f0f0;
 			text-decoration: none;
 
 			&:hover {
-				color: lime;
+				color: aliceblue;
 			}
 		}
 	}
